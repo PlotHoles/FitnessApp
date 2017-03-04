@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 
+import com.fitnessapp.fragments.SplashFragment;
 import com.fitnessapp.interfaces.NavigationImpl;
 
 import butterknife.Bind;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements NavigationImpl {
         };
 
         drawerLayout.addDrawerListener(mDrawerToggle);
+
+        openSplashScreen();
     }
 
     public void replaceFragment(Fragment mFragment, int id, String tag, boolean addToStack) {
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements NavigationImpl {
 
     @Override
     public void openSplashScreen() {
-
+        replaceFragment(new SplashFragment(), R.id.content_frame, null, false);
     }
 
     @Override
