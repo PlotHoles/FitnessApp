@@ -1,20 +1,26 @@
 package com.fitnessapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ListView;
+
+import com.fitnessapp.interfaces.NavigationImpl;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NavigationImpl {
 
     @Bind(R.id.content_frame)
     FrameLayout contentFrame;
@@ -50,5 +56,64 @@ public class MainActivity extends AppCompatActivity {
         };
 
         drawerLayout.addDrawerListener(mDrawerToggle);
+    }
+
+    public void replaceFragment(Fragment mFragment, int id, String tag, boolean addToStack) {
+        FragmentTransaction mTransaction = getSupportFragmentManager().beginTransaction();
+        mTransaction.replace(id, mFragment);
+        hideKeyboard();
+        //DebugLog.e("TAG::" + tag);
+        if (addToStack) {
+            mTransaction.addToBackStack(tag);
+        }
+        mTransaction.commit();
+    }
+
+    public void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+    @Override
+    public void openSplashScreen() {
+
+    }
+
+    @Override
+    public void openLoginScreen() {
+
+    }
+
+    @Override
+    public void openSignupScree() {
+
+    }
+
+    @Override
+    public void openServiceScreen() {
+
+    }
+
+    @Override
+    public void openAboutScreen() {
+
+    }
+
+    @Override
+    public void openContactUsScreen() {
+
+    }
+
+    @Override
+    public void openReachUsScreen() {
+
+    }
+
+    @Override
+    public void openServiceDetails() {
+
     }
 }
